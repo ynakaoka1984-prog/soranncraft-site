@@ -184,15 +184,12 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
     .ad-slot {
-      background: #f0f0f0;
-      border: 2px dashed #bbb;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
       min-height: 250px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #888;
-      font-size: 14px;
-      text-align: center;
       border-radius: 8px;
     }
     .info-box {
@@ -248,21 +245,32 @@
     <div class="sidebar-box">
       <div class="sidebar-title">⚡ 統合版 最新ニュース</div>
       <ul class="update-list">
-        <li><span class="ver-tag new">1.20.7x</span>統合版アップデート！ボルトの挙動が修正。</li>
-        <li><span class="ver-tag">1.21</span>試験的機能に新構造物「トライアルチャンバー」追加！</li>
-        <li><span class="ver-tag fix">修正</span>Script APIにおけるUI表示バグが解消されました。</li>
-        <li><span class="ver-tag tips">重要</span>Blockbench 4.10公開。アドオン書き出しが高速化。</li>
+        <li><span class="ver-tag new">1.21.30</span>最新アプデ配布開始！バンドルがついに正式実装。</li>
+        <li><span class="ver-tag">1.21.20</span>試験的機能に「ペールガーデン」関連データ追加！</li>
+        <li><span class="ver-tag fix">修正</span>Script APIの `entity.applyDamage` 周りのバグが修正。</li>
+        <li><span class="ver-tag tips">重要</span>Blockbench 4.11リリース。GLTF書き出しが安定化。</li>
+        <li><span class="ver-tag fix">修正</span>一部のカスタムテクスチャが黒紫になる問題を解消。</li>
+        <li><span class="ver-tag new">注目</span>公式のアドオン作成ガイドが更新されました。</li>
       </ul>
     </div>
 
     <div class="sidebar-box">
-      <div class="sidebar-title">🐥 マイクラ豆知識（TIPS）</div>
+      <div class="sidebar-title">🐥 ソランのマイクラ豆知識</div>
       <ul class="update-list">
         <li>・ヒヨコは種をあげると成長が早まる！水に浮くので溺れないよ。</li>
         <li>・看板に染料を使うと文字の色が変化。さらに輝くイカスミで発光！</li>
-        <li>・ハサミを使うと、雪だるま（スノーゴーレム）のかぼちゃを脱がせられる。</li>
+        <li>・ハサミを使うと、雪だるまのかぼちゃを脱がせられる。</li>
         <li>・統合版では焚き火の上で食料を4つまで同時に焼ける！燃料いらず。</li>
+        <li>・ボートにチェストを載せると、水上の移動倉庫として超便利。</li>
+        <li>・シュルカーの弾を盾で防ぐと、浮遊せずに無効化できるよ。</li>
+        <li>・ヤギの角は、銅の角笛にクラフト可能（試験的機能）。</li>
+        <li>・ウーパールーパーはバケツで捕まえるとデスポーンしなくなる！</li>
+        <li>・村人の職業ブロックを壊すと、無職に戻って再就職のチャンス。</li>
       </ul>
+    </div>
+
+    <div class="sidebar-box">
+      <div class="ad-slot"></div>
     </div>
   </aside>
 
@@ -338,9 +346,7 @@
   <aside class="sidebar-right">
     <div class="sidebar-box">
       <div class="sidebar-title">スポンサー広告</div>
-      <div class="ad-slot">
-        <p>ここに広告が表示されます<br><span style="font-size: 11px;">(Google AdSense等)</span></p>
-      </div>
+      <div class="ad-slot"></div>
     </div>
 
     <div class="sidebar-box">
@@ -350,6 +356,7 @@
         <li><span style="color:#ff9800; font-weight:900;">2位</span> RPGボス「不死帝ソウラー」攻略設定</li>
         <li><span style="color:#2c7be5; font-weight:900;">3位</span> Blockbenchでモデリング入門</li>
         <li><span style="color:#666; font-weight:900;">4位</span> スクリプトで魔法の杖を作る方法</li>
+        <li><span style="color:#666; font-weight:900;">5位</span> Beaconsを使った領土制圧システムの作り方</li>
       </ul>
     </div>
 
@@ -359,13 +366,12 @@
         <li>・Game8 [マインクラフト攻略]</li>
         <li>・Minecraft Wiki (公式)</li>
         <li>・Microsoft Learn (スクリプト解説)</li>
+      0<li>・Bridge. (アドオン開発エディタ)</li>
       </ul>
     </div>
     
     <div class="sidebar-box">
-      <div class="ad-slot" style="min-height: 200px; background: #eee;">
-        <p>広告枠<br>縦長バナーエリア</p>
-      </div>
+      <div class="ad-slot" style="min-height: 200px;"></div>
     </div>
   </aside>
 </div>
