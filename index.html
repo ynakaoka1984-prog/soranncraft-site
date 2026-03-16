@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>【マイクラ統合版】カスタムアイテムの作り方徹底解説！Blockbench活用術｜SORANNCRAFT</title>
+  <meta name="description" content="マインクラフト統合版（BE/PE）で自分だけのカスタムアイテムを作成する方法を、小学生開発者のSorannがプロ並みに詳しく解説！初心者でもBlockbenchを使えば簡単にアドオン制作が可能です。">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.8;
+    }
+    header {
+      background: linear-gradient(90deg, #1a5ab3 0%, #2c7be5 100%);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .header-logo {
+      background: white;
+      padding: 4px;
+      border-radius: 8px;
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    }
+    .header-logo img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .header-text h1 {
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 2px;
+      font-weight: 900;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .header-text p {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+      color: #e0eaff;
+    }
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+    }
+    .sidebar-left {
+      width: 320px;
+      background: #f8f9fa;
+      padding: 30px 20px;
+      border-right: 1px solid #e1e4e8;
+      min-height: 100vh;
+      flex-shrink: 0;
+    }
+    .sidebar-right {
+      width: 300px;
+      background: #f8f9fa;
+      padding: 30px 15px;
+      border-left: 1px solid #e1e4e8;
+      flex-shrink: 0;
+    }
+    .sidebar-box {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 25px;
+      border: 1px solid #e1e4e8;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .sidebar-title {
+      background: #2c7be5;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+    .rpg-status {
+      border: 2px solid #ff4757;
+      background: #fff5f5;
+    }
+    .rpg-status-title {
+      color: #ff4757;
+      font-weight: 900;
+      font-size: 18px;
+      display: block;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .update-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+    }
+    .update-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .ver-tag {
+      display: inline-block;
+      background: #4caf50;
+      color: white;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      margin-right: 5px;
+      margin-bottom: 3px;
+    }
+    .ver-tag.new { background: #ff9800; }
+    .ver-tag.fix { background: #2196f3; }
+    .ver-tag.tips { background: #9c27b0; }
+
+    main {
+      flex-grow: 1;
+      background: white;
+      padding: 40px 50px;
+      min-width: 0;
+    }
+    p {
+      font-weight: 600;
+      margin-bottom: 1.5em;
+      font-size: 17px;
+      color: #333;
+    }
+    .big-bold {
+      font-size: 26px;
+      font-weight: 900;
+      color: #1a5ab3;
+      margin: 30px 0;
+      display: block;
+      line-height: 1.4;
+    }
+    h2 {
+      background: linear-gradient(to right, #f8f9fa, #ffffff);
+      border-left: 8px solid #2c7be5;
+      border-bottom: 1px solid #eee;
+      padding: 15px 20px;
+      margin: 50px 0 25px 0;
+      font-size: 24px;
+      font-weight: 900;
+    }
+    h3 {
+      font-size: 20px;
+      border-bottom: 2px solid #2c7be5;
+      display: inline-block;
+      padding-bottom: 5px;
+      margin-top: 30px;
+      color: #1a5ab3;
+    }
+    .image-box {
+      background: #f3f3f3;
+      border: 2px solid #ddd;
+      padding: 30px;
+      text-align: center;
+      margin: 30px 0;
+      border-radius: 12px;
+    }
+    .image-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .ad-slot {
+      background: #f0f0f0;
+      border: 2px dashed #bbb;
+      min-height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 14px;
+      text-align: center;
+      border-radius: 8px;
+    }
+    .info-box {
+      background: #fff8e1;
+      border: 2px solid #ffeeba;
+      padding: 25px;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+    ul.check-list {
+      background: #f1f8ff;
+      padding: 25px 25px 25px 50px;
+      border-radius: 12px;
+      border-left: 5px solid #2c7be5;
+      list-style-type: "✔ ";
+    }
+    ul.check-list li {
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      background: #333;
+      color: white;
+    }
+    @media (max-width: 1200px) {
+      .sidebar-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">
+    <img src="Sorann右上表示.png" alt="SorannLogo">
+  </div>
+  <div class="header-text">
+    <h1>SORANNCRAFT</h1>
+    <p>統合版マイクラ攻略・アドオン開発の最前線</p>
+  </div>
+</header>
+
+<div class="container">
+  <aside class="sidebar-left">
+    <div class="sidebar-box rpg-status">
+      <span class="rpg-status-title">🔥 RPGプロジェクト進行中</span>
+      <p style="font-size: 16px; font-weight: 900; text-align: center; margin-bottom: 10px;">あともう少しで最高傑作が完成します...</p>
+      <p style="font-size: 12px; color: #666; text-align: center; margin-bottom: 10px;">かつてないシステムと壮大なストーリー。公開まで秒読み開始。</p>
+      <a href="rpg-project.html" style="display: block; text-align: center; background: #ff4757; color: white; padding: 10px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: bold; box-shadow: 0 4px 0 #b3323d;">開発状況を詳しく見る →</a>
+    </div>
+
+    <div class="sidebar-box">
+      <div class="sidebar-title">⚡ 統合版 最新ニュース</div>
+      <ul class="update-list">
+        <li><span class="ver-tag new">1.20.7x</span>統合版アップデート！ボルトの挙動が修正。</li>
+        <li><span class="ver-tag">1.21</span>試験的機能に新構造物「トライアルチャンバー」追加！</li>
+        <li><span class="ver-tag fix">修正</span>Script APIにおけるUI表示バグが解消されました。</li>
+        <li><span class="ver-tag tips">重要</span>Blockbench 4.10公開。アドオン書き出しが高速化。</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-box">
+      <div class="sidebar-title">🐥 マイクラ豆知識（TIPS）</div>
+      <ul class="update-list">
+        <li>・ヒヨコは種をあげると成長が早まる！水に浮くので溺れないよ。</li>
+        <li>・看板に染料を使うと文字の色が変化。さらに輝くイカスミで発光！</li>
+        <li>・ハサミを使うと、雪だるま（スノーゴーレム）のかぼちゃを脱がせられる。</li>
+        <li>・統合版では焚き火の上で食料を4つまで同時に焼ける！燃料いらず。</li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <div class="title-image" style="text-align:center; margin-bottom: 40px;">
+      <img src="SORANNCRAFT_title.png" style="max-width:100%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));">
+    </div>
+
+    <p>どうも！Sorann「小６」です！</p>
+    <p>マインクラフトの世界を自分の手で作り変えたいと思ったことはありませんか？</p>
+    <ul class="check-list">
+      <li>オリジナルの強力な武器（カスタムアイテム）を作ってみたい！</li>
+      <li>特殊なスキルを持つモブや、便利なGUIを追加したい！</li>
+      <li>プログラミングの力で、世界に一つだけのRPGを作りたい！</li>
+    </ul>
+
+    <p>知れば知るほど面白いのがマイクラのアドオン制作です。小学生の僕でも、正しい知識があればプロ並みのアイテムを作ることができます。</p>
+    <p>「やり方を忘れちゃった」「このコードどう書くんだっけ？」という時のために、この攻略Wikiをフル活用してくださいね！</p>
+
+    <div class="info-box">
+      <span style="font-size: 20px; font-weight: 900; color: #d35400;">💡 準備しておくべきもの</span><br>
+      <p style="font-size: 15px; margin-top: 10px;">
+        Minecraft Launcherは必ず最新版にしておきましょう。最新のアプデ情報やエンジンの変更をいち早くキャッチできます。
+      </p>
+    </div>
+
+    <h2>【徹底攻略】カスタムアイテムのテクスチャ作成</h2>
+    <p>カスタムアイテムを「最も簡単」かつ「高品質」に作る方法は、無料ソフト<strong>『Blockbench』</strong>を使うことです。これは公式でも推奨されている神ツールです。</p>
+
+    <h3>手順1：Blockbenchの初期設定（日本語化）</h3>
+    <p>まずはツールを使いやすくしましょう。英語のままだと迷いやすいので、最初に日本語設定を行います。</p>
+    <div class="image-box">
+      <img src="Blockbench言語日本語に.png" alt="Blockbench設定画面">
+      <p style="font-size: 13px; color: #666; margin-top: 10px;">File ＞ Preferences ＞ Settings の順に開き、Languageを「Japanese」に変更します。</p>
+    </div>
+    <p>「Restart now」を押して再起動すれば、メニューが日本語になり、操作ミスが激減しますよ！</p>
+
+    <h3>手順2：アイテムウィザードの導入</h3>
+    <div class="image-box">
+      <img src="blockbench言語設定.png" alt="プラグイン導入">
+    </div>
+    <p>「プラグイン」メニューから<strong>「Minecraft Item Wizard」</strong>を検索してインストールします。これを使うだけで、難しい設定ファイルを自動で生成してくれます。</p>
+
+    <h3>手順3：アイテムの基本定義</h3>
+    <p>ウィザードを起動したら、「Create an Item!」をクリック。まずはベースとなるアイテムを選びますが、今回は「鉄インゴット」を例に進めます。</p>
+    <div class="image-box">
+      <img src="アイテム作成1.png">
+    </div>
+
+    <h3>手順4：IDとステータスの設定</h3>
+    <p>ここが一番重要です！プロ並みのアイテムにするためのポイントをまとめました。</p>
+    <div class="image-box">
+      <img src="アイテム作成2png">
+    </div>
+    <ul class="check-list">
+      <li><strong>表示名：</strong> ゲーム内で実際に見える名前。日本語もOK！</li>
+      <li><strong>アイテムID：</strong> `sorann:super_sword` のように、自分の名前（ネームスペース）を最初に入れるのがプロのコツです。</li>
+      <li><strong>スタック数：</strong> 1個しか持てないレア武器にするか、64個持てる素材にするか選べます。</li>
+    </ul>
+    <p>「食べられるか」「攻撃力は？」などの設定が終わったら、最後はフォルダに書き出しましょう（Export）。</p>
+
+    <h3>手順5：テクスチャの描き込み</h3>
+    <div class="image-box">
+      <img src="アイテム作成3.png">
+    </div>
+    <p>書き出すと、真っ白なテクスチャかベースの絵が出てきます。ここで自分好みの色や形をドット絵で描いていきます。ワールドに反映された時の感動は最高ですよ！</p>
+
+    <div style="background:#eef; padding:20px; border-radius:10px; border: 1px solid #ccd;">
+      <p style="text-align: center; margin-bottom: 0;">これにて SORANNCRAFT のカスタムアイテム講座を終わります！(⌒∇⌒)<br>次はもっと高度な「スクリプトAPI」についても解説していくのでお楽しみに！</p>
+    </div>
+  </main>
+
+  <aside class="sidebar-right">
+    <div class="sidebar-box">
+      <div class="sidebar-title">スポンサー広告</div>
+      <div class="ad-slot">
+        <p>ここに広告が表示されます<br><span style="font-size: 11px;">(Google AdSense等)</span></p>
+      </div>
+    </div>
+
+    <div class="sidebar-box">
+      <div class="sidebar-title">🔥 人気の記事ランキング</div>
+      <ul class="update-list">
+        <li><span style="color:#ff4757; font-weight:900;">1位</span> カスタムアイテムの作り方（この記事）</li>
+        <li><span style="color:#ff9800; font-weight:900;">2位</span> RPGボス「不死帝ソウラー」攻略設定</li>
+        <li><span style="color:#2c7be5; font-weight:900;">3位</span> Blockbenchでモデリング入門</li>
+        <li><span style="color:#666; font-weight:900;">4位</span> スクリプトで魔法の杖を作る方法</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-box">
+      <div class="sidebar-title">おすすめ攻略サイト</div>
+      <ul class="update-list" style="color: #2c7be5;">
+        <li>・Game8 [マインクラフト攻略]</li>
+        <li>・Minecraft Wiki (公式)</li>
+        <li>・Microsoft Learn (スクリプト解説)</li>
+      </ul>
+    </div>
+    
+    <div class="sidebar-box">
+      <div class="ad-slot" style="min-height: 200px; background: #eee;">
+        <p>広告枠<br>縦長バナーエリア</p>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <p>© 2026 SORANNCRAFT - Project RPG & Minecraft Creative Guide</p>
+</footer>
+
+</body>
+</html>
