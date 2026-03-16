@@ -12,6 +12,7 @@
       padding: 0;
       color: #333;
       line-height: 1.8;
+      scroll-behavior: smooth;
     }
     header {
       background: linear-gradient(90deg, #1a5ab3 0%, #2c7be5 100%);
@@ -20,9 +21,6 @@
       display: flex;
       align-items: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
     }
     .header-logo {
       background: white;
@@ -37,6 +35,43 @@
     }
     .header-logo img { max-width: 100%; max-height: 100%; }
     
+    nav.global-nav {
+      background: #154284;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav.global-nav ul {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+      display: flex;
+    }
+    nav.global-nav li { flex: 1; }
+    nav.global-nav a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      padding: 12px 0;
+      font-weight: bold;
+      font-size: 15px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.3s;
+    }
+    nav.global-nav a:hover { background: #2c7be5; }
+
+    .breadcrumb {
+      max-width: 1600px;
+      margin: 10px auto;
+      padding: 0 30px;
+      font-size: 13px;
+      color: #666;
+    }
+    .breadcrumb a { color: #2c7be5; text-decoration: none; }
+
     .container {
       max-width: 1600px;
       margin: 0 auto;
@@ -70,9 +105,28 @@
       flex-grow: 1;
       background: white;
       padding: 40px 50px;
+      min-width: 0;
     }
     
-    /* ステータスカード */
+    .toc {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+    }
+    .toc-title {
+      font-weight: 900;
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: block;
+      color: #1a5ab3;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+    }
+    .toc ul { list-style: none; padding-left: 15px; }
+    .toc a { color: #2c7be5; text-decoration: none; font-weight: bold; }
+
     .status-card {
       background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
       border: 2px solid #ff4757;
@@ -92,7 +146,7 @@
     .progress-fill {
       background: linear-gradient(90deg, #ff4757, #ff6b81);
       height: 100%;
-      width: 95%; /* 進捗アップ！ */
+      width: 95%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -100,7 +154,6 @@
       font-weight: bold;
     }
 
-    /* データテーブル */
     .data-table {
       width: 100%;
       border-collapse: collapse;
@@ -113,10 +166,8 @@
       padding: 12px;
       text-align: left;
     }
-    .data-table td {
-      border: 1px solid #e1e4e8;
-      padding: 10px;
-    }
+    .data-table td { border: 1px solid #e1e4e8; padding: 10px; }
+    
     .rarity-common { color: #777; }
     .rarity-rare { color: #2196f3; font-weight: bold; }
     .rarity-epic { color: #9c27b0; font-weight: bold; }
@@ -151,6 +202,20 @@
       display: block;
     }
 
+    .item-preview-box {
+      text-align: center;
+      background: #fdfdfd;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .item-preview-box img {
+      max-width: 150px;
+      height: auto;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+    }
+
     .log-item {
       padding: 10px 0;
       border-bottom: 1px solid #eee;
@@ -164,10 +229,33 @@
       font-size: 11px;
       margin-right: 10px;
     }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #2c7be5;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+
     footer { text-align: center; padding: 40px; background: #333; color: white; }
+    @media (max-width: 1200px) {
+      nav.global-nav li { width: 50%; }
+      nav.global-nav ul { flex-wrap: wrap; }
+    }
   </style>
 </head>
-<body>
+<body id="top">
 
 <header>
   <div class="header-logo">
@@ -178,6 +266,20 @@
     <p style="margin:0; font-size:18px;">PROJECT: RPG - 開発速報 & データベース</p>
   </div>
 </header>
+
+<nav class="global-nav">
+  <ul>
+    <li><a href="index.html">ホーム</a></li>
+    <li><a href="index.html#toc">アイテム攻略</a></li>
+    <li><a href="#top">RPGプロジェクト</a></li>
+    <li><a href="#">スクリプト解説</a></li>
+    <li><a href="#">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">ホーム</a> ＞ <strong>PROJECT: RPG 開発状況</strong>
+</div>
 
 <div class="container">
   <aside class="sidebar">
@@ -212,7 +314,17 @@
       </div>
     </div>
 
-    <h2>📊 プロジェクト実装ボリューム</h2>
+    <div class="toc">
+      <span class="toc-title">目次</span>
+      <ul>
+        <li><a href="#vol">1. 実装ボリューム</a></li>
+        <li><a href="#mob">2. 独自モブ・ボス図鑑</a></li>
+        <li><a href="#db">3. 装備・アクセサリーデータベース</a></li>
+        <li><a href="#log">4. 最新開発ログ</a></li>
+      </ul>
+    </div>
+
+    <h2 id="vol">📊 プロジェクト実装ボリューム</h2>
     <div class="grid">
       <div class="counter-card">
         <span class="counter-num">100+</span>
@@ -228,7 +340,7 @@
       </div>
     </div>
 
-    <h2>👾 独自モブ・ボス図鑑（抜粋）</h2>
+    <h2 id="mob">👾 独自モブ・ボス図鑑（抜粋）</h2>
     <table class="data-table">
       <thead>
         <tr><th>名称</th><th>ランク</th><th>特徴</th></tr>
@@ -242,8 +354,14 @@
       </tbody>
     </table>
 
-    <h2>⚔️ 装備・アクセサリーデータベース</h2>
+    <h2 id="db">⚔️ 装備・アクセサリーデータベース</h2>
     <p>Blockbenchをフル活用した、本作独自の装備品リストです。</p>
+    
+    <div class="item-preview-box">
+      <img src="copper_sword.png" alt="見本画像">
+      <p style="font-weight: bold; margin-top: 10px;">ほとんどは独自アイテムです！などなど...</p>
+    </div>
+
     <table class="data-table">
       <thead>
         <tr><th>カテゴリー</th><th>主なアイテム</th></tr>
@@ -256,7 +374,7 @@
       </tbody>
     </table>
 
-    <h2>🗓️ 最新開発ログ（超増量版）</h2>
+    <h2 id="log">🗓️ 最新開発ログ（超増量版）</h2>
     <div class="log-item"><span class="ver-tag">2026/03/16</span> ボス「フロストヴァルゼオン」の攻撃パターンを3種追加。</div>
     <div class="log-item"><span class="ver-tag">2026/03/15</span> アクセサリー枠の実装（指輪、首飾り、腕輪、ベルト、お守り）を完了。</div>
     <div class="log-item"><span class="ver-tag">2026/03/14</span> 「虚無の騎士」「ヴォイドリーパー」のドロップ品に「シャドウケープ」を追加。</div>
@@ -272,6 +390,8 @@
     </div>
   </main>
 </div>
+
+<a href="#top" class="back-to-top">▲</a>
 
 <footer>
   <p>© 2026 SORANNCRAFT - Project RPG Development Hub</p>
