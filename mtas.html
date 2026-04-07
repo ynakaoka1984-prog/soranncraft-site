@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6126950806811993" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <title>アドオン用語集｜マインクラフト統合版開発支援｜SORANNCRAFT</title>
+  <meta name="description" content="マインクラフト統合版アドオン開発（JSON/Script API/Blockbench）の専門用語100選。初心者から上級者まで使える完全リファレンス。">
+  <meta name="keywords" content="マイクラ用語集, アドオン用語, Minecraft BE Addon, Script API, JSON, Blockbench, Molang, 統合版マイクラ開発, エンティティ, コンポーネント, リソースパック, ビヘイビアパック, manifest.json, UUID, アニメーションコントローラー">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; background: #f0f2f5; margin: 0; color: #333; line-height: 1.6; }
+    header { background: linear-gradient(90deg, #1a5ab3 0%, #2c7be5 100%); color: white; padding: 20px; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .header-logo { background: white; padding: 5px; border-radius: 8px; margin-right: 15px; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; }
+    .header-logo img { max-width: 100%; max-height: 100%; }
+    .header-text h1 { margin: 0; font-size: 24px; font-weight: 900; letter-spacing: 1px; }
+    nav.global-nav { background: #154284; position: sticky; top: 0; z-index: 1000; }
+    nav.global-nav ul { max-width: 1200px; margin: 0 auto; padding: 0; list-style: none; display: flex; overflow-x: auto; }
+    nav.global-nav a { display: block; color: white; text-decoration: none; padding: 12px 20px; font-weight: bold; white-space: nowrap; transition: background 0.3s; }
+    nav.global-nav a:hover { background: rgba(255,255,255,0.1); }
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+    .search-section { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 40px; text-align: center; }
+    .search-section h2 { margin-top: 0; color: #1a5ab3; font-weight: 900; }
+    #glossarySearch { width: 100%; max-width: 600px; padding: 15px 25px; font-size: 18px; border: 2px solid #eee; border-radius: 50px; outline: none; transition: all 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); }
+    #glossarySearch:focus { border-color: #2c7be5; box-shadow: 0 0 15px rgba(44,123,229,0.2); }
+    .stats { margin-top: 15px; font-size: 14px; color: #888; font-weight: bold; }
+    .glossary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .term-card { background: white; padding: 25px; border-radius: 15px; border-top: 5px solid #2c7be5; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: all 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .term-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+    .term-card::after { content: ""; position: absolute; top: 0; right: 0; width: 50px; height: 50px; background: linear-gradient(135deg, transparent 50%, #f8f9fa 50%); }
+    .term-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .term-title { font-size: 20px; font-weight: 900; color: #1a5ab3; margin: 0; line-height: 1.2; }
+    .term-cat { font-size: 10px; background: #eef2f7; color: #5c7cfa; padding: 3px 10px; border-radius: 20px; font-weight: 800; text-transform: uppercase; }
+    .term-desc { font-size: 14.5px; color: #4b5563; margin: 0; flex-grow: 1; }
+    .no-results { grid-column: 1 / -1; padding: 50px; text-align: center; color: #999; font-size: 18px; }
+    footer { text-align: center; padding: 50px; background: #2d3436; color: white; margin-top: 80px; }
+    @media (max-width: 600px) { .header-text h1 { font-size: 18px; } .container { margin: 15px auto; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-logo"><img src="Sorann右上表示.png" alt="SorannLogo"></div>
+  <div class="header-text"><h1>SORANNCRAFT 用語辞典</h1></div>
+</header>
+
+<nav class="global-nav">
+  <ul>
+    <li><a href="index.html">ホーム</a></li>
+    <li><a href="js.html">JSONアドバイザー</a></li>
+    <li><a href="index.html#toc">アイテム攻略</a></li>
+    <li><a href="rpg-project.html">RPGプロジェクト</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="search-section">
+    <h2>📚 アドオン開発用語集</h2>
+    <p>100種類以上のキーワードから即座に解説を表示します</p>
+    <input type="text" id="glossarySearch" placeholder="例: component, script, entity..." onkeyup="filterTerms()">
+    <div class="stats" id="termStats">表示中: 100件以上</div>
+  </div>
+
+  <div id="glossaryGrid" class="glossary-grid"></div>
+</div>
+
+<footer>
+  <p>© 2026 SORANNCRAFT - Master Terminology Archive System</p>
+</footer>
+
+<script>
+const terms = [
+  {t: "Add-on (アドオン)", c: "Basic", d: "リソースパックとビヘイビアパックを組み合わせてゲームを拡張する機能の総称。"},
+  {t: "Behavior Pack (BP)", c: "Basic", d: "エンティティの挙動、アイテムの機能、レシピなどの「仕組み」を定義するパック。"},
+  {t: "Resource Pack (RP)", c: "Basic", d: "テクスチャ、モデル、サウンド、UIなどの「見た目」を定義するパック。"},
+  {t: "manifest.json", c: "JSON", d: "アドオンの基本情報（名前、UUID、バージョン等）を記述する最重要ファイル。"},
+  {t: "UUID", c: "System", d: "重複しない世界唯一の識別番号。マニフェストや依存関係の指定に使用する。"},
+  {t: "Format Version", c: "JSON", d: "JSONの構文ルールを決定するバージョン。機能によって適切な数値が異なる。"},
+  {t: "Identifier (識別子)", c: "System", d: "「namespace:name」の形式で記述される、アイテムやエンティティの固有名称。"},
+  {t: "Component (コンポーネント)", c: "JSON", d: "アイテムやエンティティに特定の機能（体力、攻撃力等）を付加する部品。"},
+  {t: "Script API", c: "Script", d: "JavaScriptを使用して、JSONだけでは不可能な高度な動的処理を記述する機能。"},
+  {t: "Blockbench", c: "Tool", d: "マイクラ専用の3Dモデル製作、テクスチャペイント、アニメーション作成ツール。"},
+  {t: "Entity (エンティティ)", c: "Basic", d: "モブ、プレイヤー、落ちているアイテム、矢など、世界に存在する動的な物体。"},
+  {t: "Component Groups", c: "Entity", d: "特定の条件下でのみ追加・削除されるコンポーネントの集まり。状態変化に使用。"},
+  {t: "Events", c: "Entity", d: "エンティティの状態を切り替えたり、コマンドを実行したりするためのトリガー。"},
+  {t: "Molang", c: "Logic", d: "アドオン内で数値を計算したり、条件判定を行ったりするための簡易言語。"},
+  {t: "Animation Controller", c: "Logic", d: "条件（Molang）に応じてアニメーションやイベントを管理するステートマシン。"},
+  {t: "Render Controller", c: "Resource", d: "どのモデルにどのテクスチャを貼り、どう表示するかを決定するRP側の設定。"},
+  {t: "Geometry", c: "Resource", d: "モデルの形状データ。RPのmodelsフォルダにJSON形式で格納される。"},
+  {t: "Texture (テクスチャ)", c: "Resource", d: "モデルの表面を彩る画像ファイル。基本は16x16の倍数サイズ。"},
+  {t: "Particles (パーティクル)", c: "Effect", d: "火花、煙、魔法陣などの演出効果。JSONで複雑な動きを制御できる。"},
+  {t: "minecraft:item", c: "JSON", d: "カスタムアイテムを定義する際のルートコンポーネントタグ。"},
+  {t: "minecraft:block", c: "JSON", d: "カスタムブロックを定義する際のタグ。ジオメトリの指定も可能。"},
+  {t: "Loot Table", c: "System", d: "モブのドロップ品やチェストの中身の確率を制御するJSONファイル。"},
+  {t: "Recipe", c: "System", d: "作業台、かまど、切石機などでの合成手順を定義するファイル。"},
+  {t: "Script API: world", c: "Script", d: "世界のイベント（エンティティ出現、爆発、チャット等）を監視する基本クラス。"},
+  {t: "Script API: system", c: "Script", d: "実行タイミングやランタイムの制御を行うための基本クラス。"},
+  {t: "UI (User Interface)", c: "Resource", d: "所持品画面やHUD、カスタムボタンなどの表示要素。"},
+  {t: "Namespace (名前空間)", c: "System", d: "バニラや他アドオンと競合を避けるための接頭語（例: sorann:）。"},
+  {t: "Experimental (試験的)", c: "System", d: "最新のアドオン機能。ワールド設定で各項目をONにする必要がある。"},
+  {t: "VS Code", c: "Tool", d: "アドオン開発に最適なエディタ。拡張機能でJSONの補完が可能。"},
+  {t: "Language File (.lang)", c: "Resource", d: "アイテム名やメッセージを翻訳・定義するためのテキストファイル。"},
+  {t: "Animation (.animation)", c: "Resource", d: "モデルを動かすための動きの定義データ。Blockbenchで出力可能。"},
+  {t: "Material", c: "Resource", d: "レンダリングの質感（光る、半透明等）を定義する設定。"},
+  {t: "Bone (ボーン)", c: "Resource", d: "ジオメトリ内で各パーツを連結・制御するための骨組み単位。"},
+  {t: "UV Mapping", c: "Resource", d: "3Dモデルの面にどのテクスチャ画像を割り当てるかの設計図。"},
+  {t: "Attachment", c: "Entity", d: "プレイヤーやモブに特定のアイテムを「持たせる」「被せる」ためのポイント。"},
+  {t: "Damage Sensor", c: "Entity", d: "特定のダメージを受けた際の反応（無効化、反撃等）を定義する機能。"},
+  {t: "Spawn Egg", c: "Entity", d: "カスタムモブをスポーンさせるための卵。RP側で色を指定できる。"},
+  {t: "Custom Components", c: "Script", d: "Script APIを使用して、JSONに独自の新しいコンポーネントを作成する機能。"},
+  {t: "worldInitialize", c: "Script", d: "Script APIで、ワールド読み込み時に一度だけ実行されるイベント。"},
+  {t: "itemComponentRegistry", c: "Script", d: "カスタムアイテムコンポーネントを登録するための仕組み。"},
+  {t: "onHitEntity", c: "Script", d: "エンティティに攻撃が当たった際にスクリプトを実行するコンポーネント。"},
+  {t: "Ticks", c: "System", d: "マイクラの時間の単位。1秒間は通常20ティック。"},
+  {t: "Abyss Rupture", c: "Sorann", d: "不死帝ソウラーが使用する、重力を歪ませる独自の爆発エフェクト名。"},
+  {t: "Solar Emperor", c: "Sorann", d: "SORANNCRAFTのRPGプロジェクトに登場する最強クラスのカスタムボス。"},
+  {t: "Alchemy Armament", c: "Sorann", d: "エネルギーコアを主軸とした独自の武器アドオンシリーズ。"},
+  {t: "Energy Core", c: "Sorann", d: "特定の武器に装着して属性や性能を変化させるカスタムアイテム。"},
+  {t: "EarthSMP", c: "Server", d: "都市開発や国家建設をテーマにした統合版マルチサーバー。"},
+  {t: "Towny Commands", c: "Server", d: "/t deposit 等、都市運営に使用される特殊なコマンド群。"},
+  {t: "Nation", c: "Server", d: "複数の都市が合体して形成される国家単位。"},
+  {t: "Masame (柾目)", c: "Wood", d: "年輪が平行な木目。反りにくく、高級感のあるテクスチャ表現に。"},
+  {t: "Itame (板目)", c: "Wood", d: "年輪が不規則な木目。力強く、自然な木材の表現に適している。"},
+  {t: "Collision Box", c: "JSON", d: "ブロックやモブが物理的に「ぶつかる」範囲の定義。"},
+  {t: "Selection Box", c: "JSON", d: "プレイヤーがカーソルを合わせたときに選択される範囲。"},
+  {t: "Sound Definition", c: "Resource", d: "カスタムサウンドをIDに関連付け、再生可能にする設定。"},
+  {t: "Fog JSON", c: "Resource", d: "特定のバイオームや状況下での「霧」の色や濃さを変える設定。"},
+  {t: "Volume", c: "System", d: "空間内に特定のエリアを定義し、入室イベントなどを検知する機能。"},
+  {t: "Tags", c: "System", d: "エンティティに持たせる「目印」。スクリプトやコマンドでの対象指定に便利。"},
+  {t: "Scoreboard", c: "System", d: "数値を保存・表示するためのシステム。通貨やキルカウントに使用。"},
+  {t: "Camera API", c: "Script", d: "カメラを自由に動かしたり、エフェクトをかけたりするScript API。"},
+  {t: "Beta API", c: "Script", d: "開発中のScript API。予告なく仕様が変わることがあるため注意が必要。"},
+  {t: "Item Group", c: "Item", d: "クリエイティブインベントリ内でのアイテムの並び順やカテゴリ設定。"},
+  {t: "Durability", c: "Item", d: "ツールの「耐久値」。壊れるまでの使用回数を定義する。"},
+  {t: "Cooldown", c: "Item", d: "アイテムを再度使用可能になるまでの待機時間の設定。"},
+  {t: "Knockback Resistance", c: "Entity", d: "ノックバック（吹き飛ばし）に対する耐性値。"},
+  {t: "Movement Speed", c: "Entity", d: "エンティティの移動速度の基本値。"},
+  {t: "Leashable", c: "Entity", d: "リード（首輪）で繋ぐことができるかどうかを決定する。"},
+  {t: "Tameable", c: "Entity", d: "懐かせることができるかどうかを決定するコンポーネント。"},
+  {t: "Trade Table", c: "Entity", d: "村人のように取引できるアイテムの内容を定義するJSON。"},
+  {t: "Sound Event", c: "Resource", d: "攻撃、歩行、死亡などのアクションに応じた音の割り当て。"},
+  {t: "Script Module", c: "Script", d: "@minecraft/server 等、スクリプトでインポートする機能群。"},
+  {t: "AABB (Axis Aligned Bounding Box)", c: "Logic", d: "当たり判定などに使われる、座標軸に並行な直方体。"},
+  {t: "Atlas", c: "Resource", d: "複数のテクスチャを1つのファイルにまとめたもの。描写負荷を軽減する。"},
+  {t: "Material Variants", c: "Resource", d: "同じモデルで異なる質感や色を切り替えるための設定。"},
+  {t: "Animation State", c: "Logic", d: "Animation Controller内の特定の状態（待機、移動等）。"},
+  {t: "Transition", c: "Logic", d: "Animation Controllerで状態Aから状態Bへ移るための条件。"},
+  {t: "Expression", c: "Logic", d: "Molang等で記述される数式や論理式。"},
+  {t: "Property", c: "JSON", d: "マニフェストやコンポーネント内の個別の設定項目。"},
+  {t: "Dependency (依存関係)", c: "System", d: "BPが特定のRPを必要とする場合などに設定するリンク情報。"},
+  {t: "Versioning", c: "System", d: "アドオンを更新する際に管理する、セマンティックバージョニング（x.y.z）。"},
+  {t: "Composter", c: "System", d: "カスタムアイテムをコンポスターに投入可能にする設定。"},
+  {t: "Furnace Burn Time", c: "Item", d: "燃料として使用した際の燃焼時間の定義。"},
+  {t: "Creative Category", c: "Item", d: "クリエイティブタブ内の表示場所（Equipment, Nature等）。"},
+  {t: "Stacked by Data", c: "Item", d: "データ値が異なるアイテムをスタックするかどうかの設定。"},
+  {t: "Interact Component", c: "Entity", d: "プレイヤーが右クリック（タップ）した時の反応を定義。"},
+  {t: "Teleport Component", c: "Entity", d: "瞬間移動の挙動（エンダーマンのような逃避等）を定義。"},
+  {t: "Projectile", c: "Entity", d: "雪玉や矢のように「発射」されるエンティティの挙動。"},
+  {t: "Gravity", c: "Entity", d: "重力の影響をどれだけ受けるかの設定。"},
+  {t: "Health Component", c: "Entity", d: "体力の最大値や現在の値を管理する。"},
+  {t: "Navigation Component", c: "Entity", d: "段差を超えたり、水中で泳いだりするAIの移動経路設定。"},
+  {t: "Behavior Trees", c: "Logic", d: "モブの行動AIを構築するための論理構造。"},
+  {t: "Entity Factory", c: "Script", d: "スクリプトから新しいエンティティを生成する仕組み。"},
+  {t: "Dimension", c: "System", d: "オーバーワールド、ネザー、エンドなどの世界の種類。"},
+  {t: "Biome", c: "System", d: "草原、砂漠などの地形環境。アドオンで追加も可能。"},
+  {t: "Block Geometry", c: "JSON", d: "ブロックの3D形状（階段やフェンスのような複雑な形）の定義。"},
+  {t: "Friction", c: "JSON", d: "摩擦係数。氷のように滑らせたり、粘着させたりする。"},
+  {t: "Light Emission", c: "JSON", d: "ブロックが放つ光の強さ（0-15）。"},
+  {t: "Explosion Resistance", c: "JSON", d: "爆発に対する耐性値。"},
+  {t: "Mining Speed", c: "JSON", d: "特定のツールで採掘した時の破壊速度。"},
+  {t: "Item Texture Editor", c: "Tool", d: "RPのtextures/item_texture.jsonを編集し、テクスチャ名とパスを紐付ける作業。"},
+  {t: "Entity Texture Editor", c: "Tool", d: "RPのentityフォルダ内のJSONで、モブのテクスチャを管理する作業。"},
+  {t: "Sorann Creative Intelligence", c: "Sorann", d: "開発者Sorannの制作哲学に基づく、高度な自動化・演出ロジック。"}
+];
+
+function initGlossary() {
+  const grid = document.getElementById('glossaryGrid');
+  grid.innerHTML = terms.map(term => `
+    <div class="term-card">
+      <div class="term-header">
+        <h3 class="term-title">${term.t}</h3>
+        <span class="term-cat">${term.c}</span>
+      </div>
+      <p class="term-desc">${term.d}</p>
+    </div>
+  `).join('');
+  updateStats(terms.length);
+}
+
+function filterTerms() {
+  const query = document.getElementById('glossarySearch').value.toLowerCase();
+  const cards = document.getElementsByClassName('term-card');
+  let count = 0;
+
+  for (let card of cards) {
+    const title = card.querySelector('.term-title').innerText.toLowerCase();
+    const desc = card.querySelector('.term-desc').innerText.toLowerCase();
+    const cat = card.querySelector('.term-cat').innerText.toLowerCase();
+
+    if (title.includes(query) || desc.includes(query) || cat.includes(query)) {
+      card.style.display = 'flex';
+      count++;
+    } else {
+      card.style.display = 'none';
+    }
+  }
+  updateStats(count);
+}
+
+function updateStats(count) {
+  document.getElementById('termStats').innerText = `該当: ${count} 件`;
+}
+
+window.onload = initGlossary;
+</script>
+
+</body>
+</html>
