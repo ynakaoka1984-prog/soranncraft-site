@@ -418,13 +418,50 @@
       .header-text h1 { justify-content: center; }
       .header-nav-buttons { width: 100%; justify-content: center; margin: 15px 0 0 0; }
     }
-   　 .ad-left-align {
- 　　 text-align: left;
-　　  margin: 20px 0;
-　　}
+      .ad-left-align {
+      text-align: left;
+      margin: 20px 0;
+    }
+
+.fixed-ad-left {
+    position: fixed;   
+    left: 10px;    
+    top: 90%;         
+    transform: translateY(-50%);
+    z-index: 9999;    
+    background: white;    
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+    .fixed-ad-left {
+        display: none;
+    }
+}
   </style>
 </head>
 <body id="top">
+
+<div class="fixed-ad-left">
+    <script type="text/javascript">
+        imaf_partnerid = "68418";
+        imaf_siteid = "56908";
+        imaf_advid = "63927";
+        imaf_campaignid = "5774";
+        imaf_type = "Image";
+        imaf_width = "100";
+        imaf_height = "100";
+    </script>
+    <script type="text/javascript" src="//aff.i-mobile.co.jp/script/adspot_ifs.js?20130220"></script>
+
+    <div style="margin-top:5px;">
+        <a href="https://aff.i-mobile.co.jp/ad_link.ashx?pid=68418&advid=63928&psid=56908" target="_blank">インストールして遊ぶ</a>
+        <img src="//aff-imp.i-mobile.co.jp/empty.ashx?advid=63928&psid=56908" alt="" border="0" width="1" height="1">
+    </div>
+</div>
 
 <div class="lang-switch">
   <button class="lang-btn" id="langBtn" onclick="toggleLanguage()">English</button>
